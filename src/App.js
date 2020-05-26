@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import Main from './components/Main';
+import Api from './api/api';
+
+const config = {
+  host: process.env.REACT_APP_API_HOST,
+  key: process.env.REACT_APP_API_KEY,
+}
+const api = new Api(config);
 
 function App() {
+  const [data, setData] = useState({ posts: [] });
+  const [loading, setIsLoading] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      const posts = await api.getPosts();
+      setData({ posts: posts.data });
+      setIsLoading(false);
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    loading
+    ? <div>Loading</div>
+    : <Main posts={data.posts} api={api}/>
   );
 }
 
