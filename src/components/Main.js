@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Phrase from './Phrase';
+import Loader from './Loader';
 
-function Main({ api, posts, setLastPostUpdate }) {
+function Main({ api, loading, posts, setLastPostUpdate }) {
 
   const List = styled.ul`
     margin: 0;
@@ -26,22 +27,30 @@ function Main({ api, posts, setLastPostUpdate }) {
     font-size: 1.5em;
   `
 
-  if (!posts.length) {
+  const Container = styled.main`
+    position: relative;
+    min-height: 30vh;
+  `;
+
+  if (!posts.length && !loading) {
     return <NoData>No Phrases available</NoData>
   }
 
   return (
-    <Fragment>
-      <List>
-        {
-          posts.map((post) => (
-            <ListItem key={post._id}>
-              <Phrase api={api} post={post} setLastPostUpdate={setLastPostUpdate} />
-            </ListItem>
-          ))
-        }
-      </List>
-    </Fragment>
+    <Container>
+      { !loading && 
+        <List>
+          {
+            posts.map((post) => (
+              <ListItem key={post._id}>
+                <Phrase api={api} post={post} setLastPostUpdate={setLastPostUpdate} />
+              </ListItem>
+            ))
+          }
+        </List>
+      }
+      { loading && <Loader type="fill" /> }
+    </Container>
   );
 }
 

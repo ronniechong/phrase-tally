@@ -30,6 +30,7 @@ const AnimLoader = styled.div`
   transform: translateZ(0);
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
+  z-index: 100;
 
   &:before,
   &:after {
@@ -54,7 +55,7 @@ const AnimLoader = styled.div`
 
 const LoaderContainer = styled.div`
   position: absolute;
-  background: ${(props) => props.type === 'main' ? '#fed9b7' : `rgba(255,255,255, 0.25)`};
+  background: ${(props) => props.type === 'fill' ? '#fed9b7' : `rgba(255,255,255, 0)`};
   width: 100%;
   height: 100%;
   top: 0;

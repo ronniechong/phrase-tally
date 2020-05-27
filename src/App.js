@@ -36,17 +36,45 @@ function App() {
 `;
 
 const Title = styled.h1`
-  color: #f07167;
+  color: #ffffff;
   margin: 0;
 `;
 
 const Header = styled.header`
-  padding: 0.5em 1em;
+  padding: 0.5em 4.5em 0.5em 1em;
   display: flex;
   align-items: center;
   align-content: space-between;
   flex-direction: row;
-  background : #fed9b7;
+  background : #f07167;
+  position: relative;
+`;
+
+const Button = styled.button`
+  font-family: 'Kalam', cursive;
+  font-size: 2em;
+  width: 1.25em;
+  height: 1.25em;
+  border-radius: 100%;
+  line-height: 1.25em;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  outline: none;
+  background-color: #f07167;
+  font-weight: 700;
+  border: none;
+  color: #fed9b7;
+  position: absolute;
+  top: 50%;
+  right: 0.5em;
+  transform: translateY(-50%);
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    transform: translateY(-50%) scale(1.1);
+    background-color: #fed9b7;
+    color: #f07167;
+  }
 `;
 
   useEffect(() => {
@@ -68,10 +96,10 @@ const Header = styled.header`
       <GlobalStyle />
       <Header>
         <Title>{ title }</Title>
-        <Form {...formProps} />
+        <Button>+</Button>
       </Header>
-      { loading && <Loader type="main" />}
-      { !loading && <Main posts={data.posts} api={api} setLastPostUpdate={setLastPostUpdate} /> }
+      <Form {...formProps} />
+      <Main posts={data.posts} api={api} setLastPostUpdate={setLastPostUpdate} loading={loading} />
     </Fragment>
   )
 }
