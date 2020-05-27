@@ -47,7 +47,6 @@ const Header = styled.header`
   align-content: space-between;
   flex-direction: row;
   background : #fed9b7;
-  width: 100%;
 `;
 
   useEffect(() => {

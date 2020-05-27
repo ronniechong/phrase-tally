@@ -16,6 +16,8 @@ function Main({ api, posts, setLastPostUpdate }) {
 
   const ListItem = styled.li`
     margin: 1em;
+    min-width: 150px;
+    max-width: 300px;
   `;
 
   const NoData = styled.div`

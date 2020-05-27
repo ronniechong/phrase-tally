@@ -61,9 +61,7 @@ function Phrase({ api, post, setLastPostUpdate }) {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    min-width: 150px;
     min-height: 80px;
-    max-width: 250px;
   `;
 
   const Button = styled.button`
