@@ -17,7 +17,8 @@ class Api {
   }
 
   async apiCall(path, method = 'get', data = undefined) {
-    const url = `${this.host}${path}`;
+    const query = '?h={"$orderby":{"count": -1}}';
+    const url = `${this.host}${path}${query}`;
     return axios(
       {
         data,
@@ -31,8 +32,38 @@ class Api {
   }
 
   async getPosts(id = undefined) {
+    
     const path = id ? `/posts/${id}` : '/posts';
     return await this.apiCall(path);
+  }
+
+  async addPost(text) {
+    const path = '/posts';
+
+    const sanitise = (string) => {
+      const map = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#x27;',
+          "/": '&#x2F;',
+      };
+      const reg = /[&<>"'/]/ig;
+      return string.replace(reg, (match) => (map[match]));
+    }
+
+    const data = {
+      text: sanitise(text),
+      count: 1,
+      lastupdate: new Date(),
+    }
+    return await this.apiCall(path, 'post', data);
+  }
+
+  async deletePost(id) {
+    const path = `/posts/${id}`;
+    return await this.apiCall(path, 'delete');
   }
 
   async addTally(id, count = 1) {
