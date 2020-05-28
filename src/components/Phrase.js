@@ -137,7 +137,7 @@ function Phrase({ api, isAdmin, post, setLastPostUpdate }) {
 
   return (
     <SpeechBubbleContainer>
-      <SpeechBubble index={getTheme()}>
+      <SpeechBubble index={33}>
         <Container>
           <Content>{ currPost.text }</Content>
           <Counter>{ currPost.count }</Counter>

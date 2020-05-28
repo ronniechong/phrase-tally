@@ -63,6 +63,15 @@ const TextFieldContainer = styled.div`
   min-width: 50%;
 `;
 
+const placeholder = [
+  'I am the king of the jungle',
+  'There is no I in team',
+  'Happy Friday!',
+  'Fear me...',
+  'Coffee is life',
+  'I am the greatest!',
+  'Why did the chicken cross the road?'
+];
 function Form({ api, isToggle, setIsToggle, setLastPostUpdate }) {
   const { value, bind, reset } = useInput('');
   const [loading, setLoading] = useState(false);
@@ -79,12 +88,16 @@ function Form({ api, isToggle, setIsToggle, setLastPostUpdate }) {
     }
     reset();
   }
+  const getRandomPlaceholder = () => {
+    const index = Math.floor(Math.random() * placeholder.length);
+    return placeholder[index];
+  }
   return (
     <Container isToggle={isToggle}>
       <FormContainer onSubmit={handleSubmit} disabled={loading}>
         <Label htmlFor="phrase">Enter the famous phrase</Label>
         <TextFieldContainer>
-          <TextInput id="phrase" type="text" placeholder="I am the king of the jungle" disabled={loading} {...bind} />
+          <TextInput id="phrase" type="text" placeholder={getRandomPlaceholder()} disabled={loading} {...bind} />
           <ButtonInput type="submit" value={loading ? 'Saving...' : 'Save!'} disabled={loading}/>
         </TextFieldContainer>
       </FormContainer>
