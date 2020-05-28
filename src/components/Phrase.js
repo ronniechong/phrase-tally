@@ -103,6 +103,13 @@ const ButtonController = styled.div`
   right: 0;
 `;
 
+ const getIndex = () => {
+  const min = 15;
+  const max = 38;
+  return Math.floor((Math.random() * (max - min)) + min);
+}
+const index = getIndex();
+
 function Phrase({ api, isAdmin, post, setLastPostUpdate }) {
   const [currPost, setPost] = useState(post);
   const [loading, setIsLoading] = useState(false);  
@@ -129,15 +136,10 @@ function Phrase({ api, isAdmin, post, setLastPostUpdate }) {
   }
 
   const lastUpdate = `${process.env.REACT_APP_LAST_UPDATE} ${formatDistance(new Date(currPost.lastupdate), new Date(), { addSuffix: true })}`;
-  // const getTheme = () => {
-  //   const min = 15;
-  //   const max = 38;
-  //   return Math.floor((Math.random() * (max - min)) + min);
-  // }
 
   return (
     <SpeechBubbleContainer>
-      <SpeechBubble index={33}>
+      <SpeechBubble index={index}>
         <Container>
           <Content>{ currPost.text }</Content>
           <Counter>{ currPost.count }</Counter>
