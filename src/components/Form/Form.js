@@ -47,7 +47,7 @@ const TextInput = styled.input`
   font-family: 'Kalam', cursive;
   outline: none;
   max-width: 500px;
-  min-width: 300px;
+  min-width: 200px;
   width: 100%;
   border: none;
   color: #2b2d42;
