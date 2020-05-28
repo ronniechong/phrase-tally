@@ -28,7 +28,7 @@ const NoData = styled.div`
 
 const Container = styled.main`
   position: relative;
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - 80px);
 `;
 
 function Main({ api, loading, isAdmin, posts, setLastPostUpdate }) {
