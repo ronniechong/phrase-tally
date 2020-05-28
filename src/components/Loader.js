@@ -66,7 +66,7 @@ const LoaderContainer = styled.div`
 `;
 
 const Loader = (props) => (
-  <LoaderContainer {...props}>
+  <LoaderContainer type={props.fill}>
     <AnimLoader {...props}/>
   </LoaderContainer>
 );

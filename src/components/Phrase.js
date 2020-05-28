@@ -5,7 +5,7 @@ import Loader from './Loader';
 
 const SpeechBubble = styled.div`
   position: relative;
-  background: ${(props) => '#0081a7'};
+  background: ${(props) => `hsl(194, 100%, ${props.index}%)`};
   border-radius: .4em;
 
   &:after {
@@ -16,7 +16,7 @@ const SpeechBubble = styled.div`
     width: 0;
     height: 0;
     border: 2em solid transparent;
-    border-top-color: ${(props) => '#0081a7'};
+    border-top-color: ${(props) => `hsl(194, 100%, ${props.index}%)`};
     border-bottom: 0;
     border-left: 0;
     margin-left: -1em;
@@ -130,8 +130,8 @@ function Phrase({ api, isAdmin, post, setLastPostUpdate }) {
 
   const lastUpdate = `${process.env.REACT_APP_LAST_UPDATE} ${formatDistance(new Date(currPost.lastupdate), new Date(), { addSuffix: true })}`;
   const getTheme = () => {
-    const min = 10;
-    const max = 90;
+    const min = 15;
+    const max = 38;
     return Math.floor((Math.random() * (max - min)) + min);
   }
 
@@ -146,7 +146,7 @@ function Phrase({ api, isAdmin, post, setLastPostUpdate }) {
               { isAdmin && <Button onClick={del} disabled={loading}>x</Button> }
             </ButtonController>
         </Container>
-        { loading && <Loader size="small">loading</Loader>}
+        { loading && <Loader>loading</Loader>}
       </SpeechBubble>
       <FinePrint>{ lastUpdate}</FinePrint>
     </SpeechBubbleContainer>
