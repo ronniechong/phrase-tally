@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import Phrase from './Phrase';
 import Loader from './Loader';
 
-function Main({ api, loading, posts, setLastPostUpdate }) {
-
-  const List = styled.ul`
+const List = styled.ul`
     margin: 0;
     display: flex;
     flex-wrap: wrap;
@@ -29,8 +27,10 @@ function Main({ api, loading, posts, setLastPostUpdate }) {
 
   const Container = styled.main`
     position: relative;
-    min-height: 30vh;
+    min-height: calc(100vh - 70px);
   `;
+
+function Main({ api, loading, isAdmin, posts, setLastPostUpdate }) {
 
   if (!posts.length && !loading) {
     return <NoData>No Phrases available</NoData>
@@ -38,18 +38,16 @@ function Main({ api, loading, posts, setLastPostUpdate }) {
 
   return (
     <Container>
-      { !loading && 
-        <List>
-          {
-            posts.map((post) => (
-              <ListItem key={post._id}>
-                <Phrase api={api} post={post} setLastPostUpdate={setLastPostUpdate} />
-              </ListItem>
-            ))
-          }
-        </List>
-      }
-      { loading && <Loader type="fill" /> }
+      <List>
+        {
+          posts.map((post) => (
+            <ListItem key={post._id}>
+              <Phrase api={api} post={post} setLastPostUpdate={setLastPostUpdate} isAdmin={isAdmin} />
+            </ListItem>
+          ))
+        }
+      </List>
+      { loading && <Loader small/> }
     </Container>
   );
 }

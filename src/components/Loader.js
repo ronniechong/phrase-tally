@@ -55,7 +55,7 @@ const AnimLoader = styled.div`
 
 const LoaderContainer = styled.div`
   position: absolute;
-  background: ${(props) => props.type === 'fill' ? '#fed9b7' : `rgba(255,255,255, 0)`};
+  background: ${(props) => props.type === 'fill' ? '#fed9b7' : `rgba(255,255,255, 0.25)`};
   width: 100%;
   height: 100%;
   top: 0;
@@ -65,9 +65,9 @@ const LoaderContainer = styled.div`
   justify-content: center;
 `;
 
-const Loader = () => (
-  <LoaderContainer>
-    <AnimLoader/>
+const Loader = (props) => (
+  <LoaderContainer {...props}>
+    <AnimLoader {...props}/>
   </LoaderContainer>
 );
 

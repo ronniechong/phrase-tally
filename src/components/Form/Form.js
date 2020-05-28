@@ -1,22 +1,30 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useInput } from './useInput';
-import Loader from '../Loader';
 
 const Container = styled.div`
-  padding: 2em;
   background: #fed9b7;
-  position: relative;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  z-index: 4;
+  transition: all 0.5s ease-in-out;
+  top: 70px;
+  transform: ${(props) => props.isToggle ? 'translateY(0)' : 'translateY(-80%)'};
 `;
 
 const FormContainer = styled.form`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  position: relative;
+  padding: 2em;
 `;
 
 const Label = styled.label`
   font-size: 1.25em;
+  min-width: 100px;
 `;
 
 const ButtonInput = styled.input`
@@ -38,7 +46,8 @@ const TextInput = styled.input`
   font-size: 1.25em;
   font-family: 'Kalam', cursive;
   outline: none;
-  max-width: 50%;
+  max-width: 500px;
+  min-width: 300px;
   width: 100%;
   border: none;
   color: #2b2d42;
@@ -47,7 +56,14 @@ const TextInput = styled.input`
   background-color: #fdfcdc;
 `;
 
-function Form({ api, setLastPostUpdate }) {
+const TextFieldContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50%;
+`;
+
+function Form({ api, isToggle, setIsToggle, setLastPostUpdate }) {
   const { value, bind, reset } = useInput('');
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (evt) => {
@@ -58,18 +74,20 @@ function Form({ api, setLastPostUpdate }) {
       if (newPost && newPost.data) {
         setLastPostUpdate(new Date().valueOf());
       }
+      setIsToggle(false);
       setLoading(false);
     }
     reset();
   }
   return (
-    <Container>
+    <Container isToggle={isToggle}>
       <FormContainer onSubmit={handleSubmit} disabled={loading}>
         <Label htmlFor="phrase">Enter the famous phrase</Label>
-        <TextInput id="phrase" type="text" placeholder="I am the king of the jungle" disabled={loading} {...bind} />
-        <ButtonInput type="submit" value={loading ? 'Saving...' : 'Save!'} disabled={loading}/>
+        <TextFieldContainer>
+          <TextInput id="phrase" type="text" placeholder="I am the king of the jungle" disabled={loading} {...bind} />
+          <ButtonInput type="submit" value={loading ? 'Saving...' : 'Save!'} disabled={loading}/>
+        </TextFieldContainer>
       </FormContainer>
-      { loading && <Loader type="fill" /> }
     </Container>
   );
 }

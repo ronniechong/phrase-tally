@@ -17,7 +17,7 @@ class Api {
   }
 
   async apiCall(path, method = 'get', data = undefined) {
-    const query = '?h={"$orderby":{"count": -1}}';
+    const query = '?h={"$orderby":{"count": -1, "lastupdated": -1}}';
     const url = `${this.host}${path}${query}`;
     return axios(
       {
@@ -45,9 +45,9 @@ class Api {
           '&': '&amp;',
           '<': '&lt;',
           '>': '&gt;',
-          '"': '&quot;',
-          "'": '&#x27;',
-          "/": '&#x2F;',
+          // '"': '&quot;',
+          // "'": '&#x27;',
+          // "/": '&#x2F;',
       };
       const reg = /[&<>"'/]/ig;
       return string.replace(reg, (match) => (map[match]));
