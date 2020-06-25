@@ -17,7 +17,7 @@ class Api {
   }
 
   async apiCall(path, method = 'get', data = undefined) {
-    const query = '?h={"$orderby":{"count": -1, "lastupdate": 1}}';
+    const query = '?h={"$orderby":{"lastupdate": 1}}';
     const url = `${this.host}${path}${query}`;
     return axios(
       {
