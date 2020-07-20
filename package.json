@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "framer-motion": "^1.11.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "styled-components": "^5.1.0"
   }
 }
